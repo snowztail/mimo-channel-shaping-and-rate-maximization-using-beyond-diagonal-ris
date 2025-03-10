@@ -19,7 +19,7 @@
 		IEEE Transactions on Signal Processing
 	}
 	\opening{Dear Editor and Reviewers,}
-	Thank you for giving us the opportunity to submit a revised version of T-SP-32387-2024.
+	We sincerely appreciate your feedback provided during the review process of T-SP-32387-2024.
 	Your comments and suggestions have been invaluable in helping us improve the quality of the manuscript.
 	Below we prepare a point-to-point response and highlight the corresponding in-text changes, where labels have been matched to the latest version for your convenience.
 	The title has been changed to \emph{MIMO Channel Shaping and Rate Maximization Using Beyond Diagonal RIS} to better reflect the content of the manuscript.
@@ -64,7 +64,7 @@
 		We appreciate the reviewer's insightful comments.
 		The geodesic \gls{rcg} algorithm for unitary-constrained problems has indeed been proposed in the optimization literature.
 		Our contribution is an extension to block-unitary cases with parallel or unified updates that accelerate the design of group-connected \gls{bd}-\gls{ris}.
-		The claim of ``universal optimization framework'' and the non-geodesic \gls{rcg} method have been removed and we have completely reworked the optimization part to reflect the particular contributions (channel shaping).
+		The claim of ``universal optimization framework'' and the non-geodesic \gls{rcg} method have been removed to avoid confusion, and we have completely reworked the optimization part to reflect the particular contributions (channel shaping).
 		The content is too long to fit here and we kindly ask the reviewer to refer to Section \ref{sc:shaping_numerical} of the revised manuscript for details.
 	}
 
@@ -75,8 +75,8 @@
 	\reply{
 		This is an important question.
 		The weighted sum of singular values plays a crucial role in channel shaping since it helps to reveal the achievable singular value region.
-		We believe itself could serve as a metric for measuring the \gls{mimo} channel shaping capability of different \gls{ris}.
-		We have added a detailed explanation in the revised manuscript and the answer which we copy in the two boxes below.
+		We believe itself could serve as a metric for measuring the \gls{mimo} channel shaping capability of different \gls{ris} models.
+		We have added a detailed explanation in the revised manuscript which we copy in the two boxes below.
 
 		\change{
 			To validate Algorithm~\ref{ag:rcg} and quantify the shaping capability of \gls{bd}-\gls{ris}, we characterize the achievable singular value region of \gls{bd}-\gls{ris}-aided \gls{mimo} channel by considering the Pareto optimization problem
@@ -85,8 +85,8 @@
 				\addConstraint{\mathbf{\Theta}_g^\mathsf{H} \mathbf{\Theta}_g=\mathbf{I},}{\quad \forall g,}
 			\end{maxi*}
 			where $\rho_n \ge 0$ is the weight associated with the $n$-th channel singular value.
-			Varying those weights help to characterize the Pareto frontier of singular values that encloses the achievable region.
-			While the objective \eqref{ob:pareto} itself seems obscure, a larger quantity translates to a stronger singular value redistribution capability and thus better wireless performance (e.g., channel capacity for communication, detection probability for sensing, and harvestable energy for power transfer).
+			Varying those weights help to characterize the Pareto frontier that encloses the achievable singular value region.
+			While the objective \eqref{ob:pareto} itself seems obscure, a larger quantity translates to a stronger singular value redistribution capability and thus better wireless performance (e.g., channel capacity for communication \cite{Clerckx2013}, detection probability for sensing \cite{Liu2022c}, and harvested power for power transfer \cite{Shen2021}).
 			Problem \eqref{op:pareto} also generalizes the \gls{dof} problem in Proposition \ref{pp:dof} and the individual singular value shaping problem in Corollary \ref{co:nd_sv_indl} and Proposition \ref{pp:rd}.
 			It can be solved optimally by Algorithm~\ref{ag:rcg} with $[\mathbf{D}]_{n,n} = \rho_n$ in \eqref{eq:shaping_subdiff}.
 		}
@@ -96,46 +96,48 @@
 			\begin{figure}[H]
 				\centering
 				\subfloat[$2 \times 32 \times 2$ (no direct)]{
-					\resizebox{!}{3.25cm}{
+					\resizebox{!}{5cm}{
 						\input{../assets/simulation/pc_singular_pareto_sx32_nd.tex}
 
 					}
 				}
 				\subfloat[$2 \times 32 \times 2$]{
-					\resizebox{!}{3.25cm}{
+					\resizebox{!}{5cm}{
 						\input{../assets/simulation/pc_singular_pareto_sx32.tex}
 					}
 				}
 				\\
 				\subfloat[$2 \times 64 \times 2$]{
-					\resizebox{!}{3.25cm}{
+					\resizebox{!}{5cm}{
 						\input{../assets/simulation/pc_singular_pareto_sx64.tex}
 					}
 				}
 				\subfloat[$2 \times 128 \times 2$]{
-					\resizebox{!}{3.25cm}{
+					\resizebox{!}{5cm}{
 						\input{../assets/simulation/pc_singular_pareto_sx128.tex}
 					}
 				}
 				\caption{Achievable singular value regions of an $N_\mathrm{T}=N_\mathrm{R}=2$ channel shaped by \gls{bd}-\gls{ris}. The singular value pair of the direct channel are marked as baseline.
 				On the Pareto frontiers, `P-max', `E-max', and `R-max' refer to the channel power gain-optimal point, wireless power transfer-optimal point, and rate-optimal arc, respectively.}
 			\end{figure}
-			Fig. \ref{fg:singular_pareto} illustrates the achievable regions of singular values of an $N_\mathrm{T}=N_\mathrm{R}=2$ point-to-point \gls{mimo} shaped by \gls{ris}, where the channel power gain-optimal point, wireless power transfer-optimal point, and rate-optimal arc are highlighted on the Pareto frontiers.
+			Fig. \ref{fg:singular_pareto} illustrates the achievable regions of singular values of an $N_\mathrm{T}=N_\mathrm{R}=2$ point-to-point \gls{mimo} shaped by \gls{ris}, where the channel power gain-optimal point, wireless power transfer-optimal point,\footnote{For \gls{mimo} wireless power transfer with \gls{rf} combining, the maximum harvested power depends solely on the dominant channel singular value \cite{Shen2021}.} and rate-optimal arc are highlighted on the Pareto frontiers.
+			The results are obtained by solving the channel shaping problem \eqref{op:pareto} merely without any application-specific optimization.
+			% , and we conjecture that the Pareto frontier includes the optimal singular value points of other wireless applications (e.g., sensing).
 			As the \gls{snr} increases, the rate-optimal point proceeds on the arc from the east (favoring $\sigma_1(\mathbf{H})$) to the north (favoring $\sigma_2(\mathbf{H})$).
-			The results are obtained by solving the channel shaping problem \eqref{op:pareto} merely without any application-specific optimization, and we conjecture that the Pareto frontier includes the optimal singular value points of other wireless applications (e.g., sensing).
+			% The results are obtained by solving the channel shaping problem \eqref{op:pareto} merely without any application-specific optimization, and we conjecture that the Pareto frontier includes the optimal singular value points of other wireless applications (e.g., sensing).
 			When the direct channel is negligible, the achievable regions in Fig. \subref*{fg:singular_pareto_sx32_nd} are shaped like pizza slices.
 			This is because $\sigma_1(\mathbf{H}) \ge \sigma_2(\mathbf{H})$ and there exists a trade-off between the alignment of two modes.
 			The smallest singular value can be enhanced up to \num{2e-4} by \gls{d}-\gls{ris} and \num{3e-4} by fully-connected \gls{bd}-\gls{ris}, corresponding to a \qty{50}{\percent} gain.
-			We also see that for fully-connected \gls{bd}-\gls{ris}, the power gain-optimal and rate-optimal points coincide with each other, as derived in  \eqref{eq:ris_nd_power_max} and \eqref{eq:ris_nd_rate_max}.
+			We also see that for fully-connected \gls{bd}-\gls{ris}, the power gain-optimal and rate-optimal points coincide with each other, as have been proved in  \eqref{eq:ris_nd_power_max} and \eqref{eq:ris_nd_rate_max}.
 			This observation still holds in Figs. \subref*{fg:singular_pareto_sx32} -- \subref*{fg:singular_pareto_sx128} where the direct channel is significant, yet a formal proof is unavailable due to the non-trivial solution structures.
-			The shape of the singular value region depends heavily on the relative strength of the indirect channels, which is $\Lambda_\mathrm{F}\Lambda_\mathrm{B}/\Lambda_\mathrm{D}=\qty{-35}{dB}$.
+			The shape of the singular value region depends heavily on the relative strength of the indirect channels, which is $\Lambda_\mathrm{F}\Lambda_\mathrm{B}/\Lambda_\mathrm{D}=\qty{-35}{dB}$ here.
 			Fig. \subref*{fg:singular_pareto_sx32} shows that a 32-element \gls{ris} is insufficient to compensate this imbalance and results in a limited singular value region that is symmetric around the direct point.
 			As the group size $L$ increases, the shape of the region evolves from elliptical to square.
 			This transformation not only improves the dynamic range of $\sigma_1(\mathbf{H})$ and $\sigma_2(\mathbf{H})$ by \qty{22}{\percent} and \qty{38}{\percent}, but also provides a better trade-off in manipulating both singular values.
 			It verifies that the design flexibility of \gls{bd}-\gls{ris} allows better alignment of multiple modes simultaneously.
-			As a consequence, \emph{the optimally shaped channels for different applications coincide with each other,} which emphasizes the benefits of \emph{multi-functional} \gls{bd}-\gls{ris}.
+			As a consequence, {the optimally shaped channels for power gain, communication, and power transfer coincide,} which implies that {a fully-connected \gls{bd}-\gls{ris} may be designed in closed-form for multi-functional optimality.}
 			The singular value region also enlarges as the number of scattering elements $N_\mathrm{S}$ increases.
-			In particular, Fig. \subref*{fg:singular_pareto_sx128} shows that the equivalent channel can be completely nulled (corresponding to the origin) by a 128-element \gls{bd}-\gls{ris} but not by a diagonal one, which can be leveraged for interference mitigation and secure communication.
+			In particular, Fig. \subref*{fg:singular_pareto_sx128} shows that the equivalent channel can be completely nulled (corresponding to the origin) by a 128-element \gls{bd}-\gls{ris} but not by a diagonal one, which may be leveraged for interference cancellation and covert communication.
 			Those results demonstrate the superior channel shaping capability of \gls{bd}-\gls{ris} and emphasizes the importance of adding reconfigurable inter-connections between elements.
 		}
 	}
@@ -174,81 +176,75 @@
 	}
 
 	\reply{
-		Using the rank equation pointed out by the reviewer, we realized that the achievability proof was incorrect, and the proposition itself was incorrect.
-		We really appreciate the reviewer for pointing out this mistake!
+		Using the rank equation pointed out by the reviewer, we realized that the achievability proof was invalid and the proposition itself was wrong.
+		We really appreciate the reviewer for pointing out this mistake.
 		A new proof in Appendix \ref{ap:dof} shows that \gls{bd}-\gls{ris} may achieve a larger or smaller number of \gls{mimo} \gls{dof} than \gls{d}-\gls{ris}.
 		The change in the main text is as follows.
 		\change{
 			\setcounter{proposition}{0}
-			\begin{proposition}[Degrees of freedom]
-				\gls{bd}-\gls{ris} may achieve a larger or smaller \gls{mimo} \gls{dof}\footnotetext{Here communication \gls{dof} refers to the maximum number of independent streams that can be transmitted in parallel over a \gls{mimo} channel, i.e., $\mathrm{DoF}(\mathbf{H}) = \lim_{\rho \to \infty} \frac{\log \det(\mathbf{I} + \rho \mathbf{H} \mathbf{H}^\mathsf{H})}{\log \rho}$ where $\rho$ is the \gls{snr}. The concept is closely related to radar \gls{dof} which refers to the number of independent measurements.} than \gls{d}-\gls{ris}.
+			\begin{proposition}[\gls{dof}]
+				\gls{bd}-\gls{ris} may achieve a larger or smaller \gls{mimo} \gls{dof} than \gls{d}-\gls{ris}.
 			\end{proposition}
 			\begin{proof}
-				Please refer to Appendix~\ref{ap:dof}.
+				Please refer to Appendix~\ref{ap:dof} in the supplement.
 			\end{proof}
 
-			While increasing the \gls{dof} improves the asymptotic rate performance for point-to-point transmission, the ability to reduce the \gls{dof} can be exploited to orthogonalize channels and align interference in multi-user scenarios.
+			While increasing the \gls{dof} improves the asymptotic rate performance for point-to-point transmission, the potential to reduce the \gls{dof} can be exploited to orthogonalize channels and align interference in multi-user scenarios.
 			% reducing the \gls{dof} does not necessarily degrade the rate at finite \gls{snr}.
 			% , it does not necessarily imply a higher rate at finite \gls{snr}.
 			% It is worth mentioning that a larger \gls{dof} implies more parallel streams or less interference, which is beneficial for high-rate communication.
 
 			\begin{example}[\gls{dof} of $4 \times 4 \times 4$ shaping]
-				Consider a $4 \times 4 \times 4$ shaping with $\mathbf{H}_\mathrm{D} = \mathbf{0}$ and
-				\begin{equation*}
-					\mathbf{H}_\mathrm{B} =
-					\begin{bmatrix}
-						1 & 1 & 0 & 0 \\
-						0 & 0 & 0 & 0 \\
-						0 & 0 & 1 & 0 \\
-						0 & 0 & 0 & 0
-					\end{bmatrix}, \quad
-					\mathbf{H}_\mathrm{F} =
-					\begin{bmatrix}
-						1 & 0 & 0 & 0 \\
-						0 & 1 & 0 & 0 \\
-						0 & 0 & 0 & 0 \\
-						0 & 0 & 0 & 0
-					\end{bmatrix}.
-				\end{equation*}
+				Consider a $4 \times 4 \times 4$ shaping with $\mathbf{H}_\mathrm{D} = \mathbf{0}$, $\mathbf{H}_\mathrm{B} =
+				\begin{bsmallmatrix}
+					1 & 1 & 0 & 0 \\
+					0 & 0 & 0 & 0 \\
+					0 & 0 & 1 & 0 \\
+					0 & 0 & 0 & 0
+				\end{bsmallmatrix}$, and $\mathbf{H}_\mathrm{F} = \diag(1, 1, 0, 0).$
 				Evidently, any \gls{d}-\gls{ris} $\mathbf{\Theta}_\mathrm{D} = \diag(e^{\jmath \theta_1}, e^{\jmath \theta_2}, e^{\jmath \theta_3}, e^{\jmath \theta_4})$ results in
 				\begin{equation*}
 					\mathbf{H} =
-					\begin{bmatrix}
-						e^{\jmath \theta_1} & e^{\jmath \theta_2} & 0 & 0 \\
+					\begin{bsmallmatrix}
+						\scriptscriptstyle e^{\jmath \theta_1} & \scriptscriptstyle e^{\jmath \theta_2} & 0 & 0 \\
 						0 & 0 & 0 & 0 \\
 						0 & 0 & 0 & 0 \\
 						0 & 0 & 0 & 0
-					\end{bmatrix}
+					\end{bsmallmatrix}
 				\end{equation*}
-				and achieves a \gls{dof} of 1.
-				On the other hand, as instructed by \eqref{eq:ris_dof_max} and \eqref{eq:ris_dof_min}, fully-connected \gls{bd}-\gls{ris} $\mathbf{\Theta}_{\textnormal{DoF-max}}^{\textnormal{MIMO}} =
+				with 1 \gls{dof}.
+				On the other hand, a fully-connected \gls{bd}-\gls{ris} can perfectly align or misalign the kernels of $\mathbf{H}_\mathrm{B}$ and $\mathbf{H}_\mathrm{F}$ using the closed-form solutions \eqref{eq:ris_dof_max} or \eqref{eq:ris_dof_min} in Appendix~\ref{ap:dof}. That is,
+				$\mathbf{\Theta}_{\textnormal{DoF-max}}^{\textnormal{MIMO}} =
 				\begin{bsmallmatrix}
-					0 & \frac{\sqrt{2}}{2} & 0 & -\frac{\sqrt{2}}{2} \\
-					0 & \frac{\sqrt{2}}{2} & 0 & \frac{\sqrt{2}}{2} \\
+					0 & \scriptscriptstyle{\frac{1}{\sqrt{2}}} & 0 & \scriptscriptstyle{-\frac{1}{\sqrt{2}}} \\
+					0 & \scriptscriptstyle{\frac{1}{\sqrt{2}}} & 0 & \scriptscriptstyle{\frac{1}{\sqrt{2}}} \\
 					-1 & 0 & 0 & 0 \\
 					0 & 0 & 1 & 0
-				\end{bsmallmatrix}$ and $\mathbf{\Theta}_{\textnormal{DoF-min}}^{\textnormal{MIMO}} =
+				\end{bsmallmatrix}$
+				and
+				$\mathbf{\Theta}_{\textnormal{DoF-min}}^{\textnormal{MIMO}} =
 				\begin{bsmallmatrix}
-					-\frac{\sqrt{2}}{2} & 0 & \frac{\sqrt{2}}{2} & 0\\
-					\frac{\sqrt{2}}{2} & 0 & \frac{\sqrt{2}}{2} & 0 \\
+					\scriptscriptstyle{-\frac{1}{\sqrt{2}}} & 0 & \scriptscriptstyle{\frac{1}{\sqrt{2}}} & 0\\
+					\scriptscriptstyle{\frac{1}{\sqrt{2}}} & 0 & \scriptscriptstyle{\frac{1}{\sqrt{2}}} & 0 \\
 					0 & 0 & 0 & 1 \\
 					0 & -1 & 0 & 0
-				\end{bsmallmatrix}$
-				result in
+				\end{bsmallmatrix}$,
+				which correspond to
 				\begin{equation*}
 					\mathbf{H} =
-					\begin{bmatrix}
+					\begin{bsmallmatrix}
 						0 & \sqrt{2} & 0 & 0 \\
 						0 & 0 & 0 & 0 \\
 						-1 & 0 & 0 & 0 \\
 						0 & 0 & 0 & 0
-					\end{bmatrix}, \quad
+					\end{bsmallmatrix}, \quad
 					\mathbf{H} = \mathbf{0},
 				\end{equation*}
-				and achieve \gls{dof} of 2 and 0, respectively.
+				and a \gls{dof} of 2 and 0, respectively.
 			\end{example}
 
 			Proposition \ref{pp:dof} and Example \ref{eg:dof} suggest that we can expect more parallel streams or less interference when shaping the channel with \gls{bd}-\gls{ris}.
+			The latter is particularly helpful in multi-user scenarios where the problem of interest is interference alignment or physical layer security.
 			We now take a step further to examine the limits of redistributing channel singular values under specific channel conditions.
 		}
 	}
@@ -259,7 +255,17 @@
 	}
 
 	\reply{
-		We would like to argue that, while Corollaries \ref{co:nd_sv_prod_subset} -- \ref{co:nd_sv_prod_tail} are standard mathematical results, it is Proposition \ref{pp:nd} that allows one to recast the channel shaping question as a well-studied linear algebra problem and enable those.
+		We would like to argue that, while Corollaries \ref{co:nd_sv_prod_subset} -- \ref{co:nd_sv_prod_tail} are standard mathematical results, it is Proposition \ref{pp:nd} that allows one to recast the channel shaping question as a well-studied linear algebra problem and enable those. We have added a paragraph to reflect this point.
+
+		\change{
+			Proposition \ref{pp:nd} says that if the direct channel is negligible and the \gls{bd}-\gls{ris} is fully-connected, the only singular value bounds on the equivalent channel are those on the product of unitary-transformed backward and forward channels.
+			It is \emph{not necessarily} an asymptotic result and does \emph{not} depend on any relationship between $N_\mathrm{R}$, $N_\mathrm{S}$, and $N_\mathrm{T}$.
+			Its importance lies in that our initial channel shaping question can be recast as a linear algebra question: \emph{How the singular values of matrix product are bounded by the singular values of its individual factors?}
+			The question is partially answered in Corollaries \ref{co:nd_sv_prod_subset} -- \ref{co:nd_sv_indl} over the definition $\bar{N} = \max(N_\mathrm{T},N_\mathrm{S},N_\mathrm{R})$ and $\sigma_n(\mathbf{H})=\sigma_n(\mathbf{H}_\mathrm{F})=\sigma_n(\mathbf{H}_\mathrm{B})=0, \ \forall n \in [\bar{N}] \setminus [N]$.
+			This is equivalent to padding zero blocks at the end of $\mathbf{H}, \mathbf{H}_\mathrm{B}, \mathbf{H}_\mathrm{F}$ to make square matrices of dimension $\bar{N}$.
+			The results are by no means complete and interested readers are referred to \cite[Chapter 16, 24]{Hogben2013} and \cite[Chapter 3]{Horn1994} for more information.
+		}
+
 		In the revised manuscript, we have emphasized above and have also added
 		\begin{itemize}
 			\item Upper and lower bounds on individual singular value in Corollary \ref{co:nd_sv_indl};
@@ -269,7 +275,7 @@
 		The corresponding \gls{ris} scattering matrices have also been derived in closed form.
 		We believe those bounds and \gls{ris} expressions not only serve as benchmarks but also motivate low-complexity designs (e.g., Section \ref{sc:rate_lc}) in various wireless applications.
 		For example, the bounds on the $n$-th singular value can be used to simplify precoding design in \gls{mimo} systems with limited number $n$ of RF chains.
-		The comparison to relay beamforming design is insightful and we have added footnote \ref{fn:power_nd_max} to highlight the connection.
+		The comparison to relay beamforming design is insightful and we have added a paragraph to highlight the connection.
 		\change{
 			\setcounter{proposition}{3}
 			\setcounter{corollary}{2}
@@ -285,8 +291,7 @@
 					\mathbf{\Theta}_{\textnormal{sv-}n\textnormal{-max}}^\textnormal{MIMO-ND} & = \mathbf{V}_\mathrm{B} \mathbf{P} \mathbf{U}_\mathrm{F}^\mathsf{H}, \\
 					\mathbf{\Theta}_{\textnormal{sv-}n\textnormal{-min}}^\textnormal{MIMO-ND} & = \mathbf{V}_\mathrm{B} \mathbf{Q} \mathbf{U}_\mathrm{F}^\mathsf{H},
 				\end{align*}
-				where $\mathbf{V}_\mathrm{B}, \mathbf{U}_\mathrm{F} \in \mathbb{U}^{N_\mathrm{S} \times N_\mathrm{S}}$ are any right and left singular matrices\footnotetext{%
-					We highlight the non-uniqueness of $\mathbf{V}_\mathrm{B}$ and $\mathbf{U}_\mathrm{F}$. When a singular value has multiplicity $k$, the corresponding singular vectors can be any orthonormal basis of the $k$-dimensional subspace. Even if all singular values are distinct, the singular vectors of each can be scaled by a phase factor of choice.} of $\mathbf{H}_\mathrm{B}$ and $\mathbf{H}_\mathrm{F}$, respectively,
+				where $\mathbf{V}_\mathrm{B}, \mathbf{U}_\mathrm{F} \in \mathbb{U}^{N_\mathrm{S} \times N_\mathrm{S}}$ are any right and left singular matrices of $\mathbf{H}_\mathrm{B}$ and $\mathbf{H}_\mathrm{F}$, respectively,
 				and $\mathbf{P}$ and $\mathbf{Q}$ are arbitrary permutation matrices of dimension $N_\mathrm{S}$ satisfying:
 				\begin{itemize}
 					\item The $(i, j)$-th entry is $1$, where
@@ -313,11 +318,12 @@
 
 		\change{
 			\begin{corollary}[Channel power gain]
-				If the direct channel is negligible, then the channel power gain is bounded from above (resp. below) by the inner product of squared singular values of $\mathbf{H}_\mathrm{B}$ and $\mathbf{H}_\mathrm{F}$ when they are sorted similarly (resp. oppositely), that is,\footnotetext{As a side note, we notice \cite{Fang1994} discussed a similar bound using extreme singular values $\max\bigl(\sigma_{N}(\mathbf{H}_\mathrm{B}) \lVert \mathbf{H}_\mathrm{F} \rVert _\mathrm{F}^2, \sigma_{N}(\mathbf{H}_\mathrm{F}) \lVert \mathbf{H}_\mathrm{B} \rVert _\mathrm{F}^2\bigr) \le \lVert \mathbf{H} \rVert _\mathrm{F}^2 \le \min\bigl(\sigma_1(\mathbf{H}_\mathrm{B}) \lVert \mathbf{H}_\mathrm{F} \rVert _\mathrm{F}^2, \sigma_1(\mathbf{H}_\mathrm{F}) \lVert \mathbf{H}_\mathrm{B} \rVert _\mathrm{F}^2\bigr)$. This is a looser version of \eqref{iq:power_nd} and cannot take equalities unless the extreme singular values are of multiplicity $N$.}
+				If the direct channel is negligible, then the channel power gain is bounded from above (resp. below) by the inner product of squared singular values of $\mathbf{H}_\mathrm{B}$ and $\mathbf{H}_\mathrm{F}$ when they are sorted similarly (resp. oppositely), that is,
+				% \footnote{As a side note, we notice \cite{Fang1994} discussed a similar bound using extreme singular values $\max\bigl(\sigma_{N}(\mathbf{H}_\mathrm{B}) \lVert \mathbf{H}_\mathrm{F} \rVert _\mathrm{F}^2, \sigma_{N}(\mathbf{H}_\mathrm{F}) \lVert \mathbf{H}_\mathrm{B} \rVert _\mathrm{F}^2\bigr) \le \lVert \mathbf{H} \rVert _\mathrm{F}^2 \le \min\bigl(\sigma_1(\mathbf{H}_\mathrm{B}) \lVert \mathbf{H}_\mathrm{F} \rVert _\mathrm{F}^2, \sigma_1(\mathbf{H}_\mathrm{F}) \lVert \mathbf{H}_\mathrm{B} \rVert _\mathrm{F}^2\bigr)$. This is a looser version of \eqref{iq:power_nd} and cannot take equalities unless the extreme singular values are of multiplicity $N$.}
 				\begin{equation*}
 					\sum_{n=1}^N \sigma_n^2(\mathbf{H}_\mathrm{B}) \sigma_{N_\mathrm{S}-n+1}^2(\mathbf{H}_\mathrm{F}) \le \lVert \mathbf{H} \rVert _\mathrm{F}^2 \le \sum_{n=1}^N \sigma_n^2(\mathbf{H}_\mathrm{B}) \sigma_n^2(\mathbf{H}_\mathrm{F}),
 				\end{equation*}
-				whose upper\footnotetext{The upper bound \eqref{eq:ris_nd_power_max} is reminiscent of the optimal amplify-and-forward relay beamforming design \cite[(16), (17)]{Rong2009a} where the diagonal matrices boil down to $\mathbf{I}$ due to the passive nature of \gls{ris}.} and lower bounds are attained respectively at
+				whose upper and lower bounds are attained respectively at
 				\begin{align*}
 					\mathbf{\Theta}_\textnormal{P-max}^\textnormal{MIMO-ND} & = \mathbf{V}_\mathrm{B} \mathbf{U}_\mathrm{F}^\mathsf{H},             \\
 					\mathbf{\Theta}_\textnormal{P-min}^\textnormal{MIMO-ND} & = \mathbf{V}_\mathrm{B} \mathbf{J} \mathbf{U}_\mathrm{F}^\mathsf{H},
@@ -325,6 +331,7 @@
 				where $\mathbf{J}$ is the exchange (a.k.a. backward identity) matrix of dimension $N_\mathrm{S}$.
 			\end{corollary}
 			We notice that \eqref{eq:ris_nd_power_max} and \eqref{eq:ris_nd_power_min} are special cases of \eqref{eq:ris_nd_sv_indl_max} and \eqref{eq:ris_nd_sv_indl_min} with $\mathbf{P} = \mathbf{I}$ and $\mathbf{Q} = \mathbf{J}$, which also attain the right and left halves of \eqref{iq:sv_nd_extreme}, respectively.
+			The upper bound \eqref{eq:ris_nd_power_max} is also reminiscent of the optimal amplify-and-forward relay beamforming design \cite[(16), (17)]{Rong2009a} where the diagonal power allocation matrices boil down to $\mathbf{I}$ due to the passive nature of \gls{ris}.
 		}
 
 		\change{
@@ -339,9 +346,9 @@
 					\mathbf{\Theta}_\textnormal{R-max}^\textnormal{MIMO-ND} = \mathbf{V}_\mathrm{B} \mathbf{U}_\mathrm{F}^\mathsf{H}.
 				\end{equation*}
 			\end{corollary}
-			Corollary \ref{co:nd_capacity_snr_general} also suggests that the power- and rate-optimal scattering matrices \eqref{eq:ris_nd_power_max} and \eqref{eq:ris_nd_rate_max} coincide with each other when the direct channel is negligible and the \gls{bd}-\gls{ris} is fully-connected.
+			Corollary \ref{co:nd_capacity_snr_general} also suggests that the power gain- and rate-optimal scattering matrices \eqref{eq:ris_nd_power_max} and \eqref{eq:ris_nd_rate_max} coincide with each other when the direct channel is negligible and the \gls{bd}-\gls{ris} is fully-connected.
 			When either condition is not satisfied, active and passive beamforming are coupled and the rate-optimal solution involves alternating optimization.
-			However, the power-optimal \gls{ris} still provides for a low-complexity decoupled solution.
+			However, the power gain-optimal \gls{ris} still provides for a low-complexity decoupled solution.
 			The details will be discussed in Section~\ref{sc:rate}.
 		}
 
@@ -365,7 +372,7 @@
 		We agree with the reviewer that problem \eqref{op:rate_ris} may be solved by the method proposed in \cite{Li2023b} with appropriate adjustment.
 		We believe our method is more efficient as evident from Table \ref{tb:complexity_algorithm}.
 		However, although problem \eqref{op:power} has been studied in symmetric \gls{bd}-\gls{ris}-aided \gls{miso} \cite{Santamaria2023} where only one mode is available, generalizing those to \gls{mimo} is non-trivial due to trade-off between modes.
-		We have also added footnote \ref{fn:power_gain} to clarify this point.
+		We have also added a paragraph to clarify this point.
 		\change{
 			Problem \eqref{op:power} has been studied in \gls{siso} \cite{Shen2020a} and \gls{miso} equivalents \cite{Santamaria2023,Fang2023,Nerini2023,Nerini2023b} where only one mode is available. Generalizing those to \gls{mimo} is non-trivial due to trade-off between modes.
 		}
@@ -383,24 +390,40 @@
 		\setcounter{proposition}{4}
 		\change{
 			\begin{proposition}
-				Starting from any feasible $\mathbf{\Theta}^{(0)}$, the sequence\footnotetext{However, \eqref{eq:ris_power} might not converge to a single solution point when $\mathbf{M}_g$ is rank-deficient due to the non-uniqueness of the orthonormal bases of kernels.}
+				Starting from any feasible $\mathbf{\Theta}^{(0)}$, the orthogonal projection of
 				\begin{equation*}
-					\mathbf{\Theta}_g^{(r+1)} = \mathbf{U}_g^{(r)} \mathbf{V}_g^{(r)}, \quad \forall g
+					\mathbf{M}_g^{(r)} = \mathbf{H}_{\mathrm{B},g}^\mathsf{H} \Bigl(\mathbf{H}_\mathrm{D} + \mathbf{H}_\mathrm{B} \diag\bigl(\mathbf{\Theta}_{[1:g-1]}^{(r+1)},\mathbf{\Theta}_{[g:G]}^{(r)}\bigr) \mathbf{H}_\mathrm{F}\Bigr) \mathbf{H}_{\mathrm{F},g}^\mathsf{H}
+				\end{equation*}
+				onto the Stiefel manifold, given in the closed-form \cite{Manton2002}
+				% $\pi(\mathbf{M}_g) = {\arg\min}_{\mathbf{X}_g \in \mathbb{U}^{L \times L}} \lVert \mathbf{M}_g - \mathbf{X}_g \rVert _\mathrm{F} = \mathbf{U}_g \mathbf{V}_g^\mathsf{H}$ .
+				% sequence
+				% \footnote{However, \eqref{eq:ris_power} might not converge to a single solution point when $\mathbf{M}_g$ is rank-deficient due to the non-uniqueness of the orthonormal bases of kernels.}
+				\begin{equation*}
+					\mathbf{\Theta}_g^{(r+1)} = \underset{\mathbf{X}_g \in \mathbb{U}^{L \times L}}{\arg\min} \lVert \mathbf{M}_g - \mathbf{X}_g \rVert _\mathrm{F} = \mathbf{U}_g^{(r)} \mathbf{V}_g^{(r)\mathsf{H}},
 				\end{equation*}
 				monotonically increases the objective function \eqref{ob:power},
-				where $\mathbf{U}_g^{(r)}$ and $\mathbf{V}_g^{(r)}$ are any left and right singular matrices of\footnotetext{We notice that $\mathbf{\Theta}_g$ coincides with the orthogonal projection of $\mathbf{M}_g$ onto the Stiefel manifold $\pi(\mathbf{M}_g) = {\arg\min}_{\mathbf{X}_g \in \mathbb{U}^{L \times L}} \lVert \mathbf{M}_g - \mathbf{X}_g \rVert _\mathrm{F} = \mathbf{U}_g \mathbf{V}_g$.} % \cite{Manton2002}
-				\begin{equation*}
-					\mathbf{M}_g^{(r)} = \mathbf{H}_{\mathrm{B},g}^\mathsf{H} \Bigl(\mathbf{H}_\mathrm{D} + \mathbf{H}_\mathrm{B} \diag\bigl(\mathbf{\Theta}_{[1:g-1]}^{(r+1)},\mathbf{\Theta}_{[g:G]}^{(r)}\bigr) \mathbf{H}_\mathrm{F}\Bigr) \mathbf{H}_{\mathrm{F},g}^\mathsf{H}.
-				\end{equation*}
-				Besides, when \eqref{eq:auxiliary_power} converges, \eqref{eq:ris_power} leads to a convergence of the objective function \eqref{ob:power} towards a stationary point.
+				% leads to a convergence of the objective function \eqref{ob:power} towards a stationary point,\footnote{However, \eqref{eq:ris_power} might not converge to a single solution point due to the non-uniqueness of \gls{svd}, especially when $\mathbf{M}_g$ is rank-deficient.}
+				where $\mathbf{U}_g^{(r)}$ and $\mathbf{V}_g^{(r)}$ are any left and right singular matrices of $\mathbf{M}_g^{(r)}$.
+				% However, \eqref{eq:ris_power} might not converge to a single solution due to the non-uniqueness of \gls{svd}, c.f. Remark \ref{rm:svd}.
+				When \eqref{eq:auxiliary_power} converges, \eqref{eq:ris_power} leads to a convergence of the objective function \eqref{ob:power} towards a stationary point.
 			\end{proposition}
 		}
 
 		\change{
-			\setcounter{remark}{2}
+			\setcounter{remark}{1}
 			\begin{remark}
-				The sequence \eqref{eq:auxiliary_power} is constructed iteratively from its orthogonal projection.
-				Although a formal proof remains elusive, empirical evidence from simulation indicates that \eqref{eq:auxiliary_power} converge, and thus \eqref{eq:ris_power} converges to a stationary point, for extensively tested scenarios.
+				We emphasize that the singular matrices in the \gls{svd} are not uniquely defined.
+				When a singular value has multiplicity $k$, the corresponding singular vectors can be any orthonormal basis of the $k$-dimensional subspace. Even if all singular values are distinct, the singular vectors of each can be scaled by a phase factor of choice.
+				Consequently, all \gls{svd}-based \gls{ris} solutions in this paper are inherently non-unique.
+			\end{remark}
+	}
+		\change{
+			\setcounter{remark}{3}
+			\begin{remark}
+				While a rigorous proof remains intricate due to the non-uniqueness of \gls{svd},
+				there is strong empirical evidence from simulation result that
+				% empirical evidence from extensive simulation indicates that
+				\eqref{eq:auxiliary_power} converges and \eqref{eq:ris_power} provides an optimal solution for vastly tested scenarios.
 			\end{remark}
 		}
 	}
@@ -484,12 +507,12 @@
 		The following context has been added to the manuscript to support this claim.
 
 		\change{
-			Corollary \ref{co:nd_capacity_snr_general} also suggests that the power- and rate-optimal scattering matrices \eqref{eq:ris_nd_power_max} and \eqref{eq:ris_nd_rate_max} coincide with each other when the direct channel is negligible and the \gls{bd}-\gls{ris} is fully-connected.
+			Corollary \ref{co:nd_capacity_snr_general} also suggests that the power gain- and rate-optimal scattering matrices \eqref{eq:ris_nd_power_max} and \eqref{eq:ris_nd_rate_max} coincide with each other when the direct channel is negligible and the \gls{bd}-\gls{ris} is fully-connected.
 			When either condition is not satisfied, active and passive beamforming are coupled and the rate-optimal solution involves alternating optimization.
 			However, the power gain-optimal \gls{ris} still provides for a low-complexity decoupled solution.
 		}
 		\change{
-			We also see that for fully-connected \gls{bd}-\gls{ris}, the power gain-optimal and rate-optimal points coincide with each other, as derived in  \eqref{eq:ris_nd_power_max} and \eqref{eq:ris_nd_rate_max}.
+			We also see that for fully-connected \gls{bd}-\gls{ris}, the power gain-optimal and rate-optimal points coincide with each other, as have been proved in  \eqref{eq:ris_nd_power_max} and \eqref{eq:ris_nd_rate_max}.
 			This observation still holds in Figs. \subref*{fg:singular_pareto_sx32} -- \subref*{fg:singular_pareto_sx128} where the direct channel is significant, yet a formal proof is unavailable due to the non-trivial solution structures.
 		}
 	}
@@ -506,12 +529,12 @@
 			\begin{figure}[H]
 				\centering
 				\subfloat[Pareto: $2 \times 64 \times 2$]{
-					\resizebox{!}{3.15cm}{
+					\resizebox{!}{5cm}{
 						\input{../assets/simulation/pc_singular_csi.tex}
 					}
 				}
 				\subfloat[Rate: $4 \times 128 \times 4$]{
-					\resizebox{!}{3.15cm}{
+					\resizebox{!}{5cm}{
 						\input{../assets/simulation/pc_rate_csi.tex}
 					}
 				}
@@ -522,7 +545,7 @@
 				}
 			\end{figure}
 
-			Figs. \ref{fg:pc_singular_csi} and \ref{fg:pc_rate_csi} investigates how \gls{ris} channel estimation errors affect the system performance in terms of singular value region and achievable rate.
+			Figs. \subref*{fg:pc_singular_csi} and \subref*{fg:pc_rate_csi} investigates how \gls{ris} channel estimation errors affect the system performance in terms of singular value region and achievable rate.
 			We assume the direct channel can be perfectly acquired and the estimated backward and forward channels are modeled by
 			\begin{equation*}
 				\hat{\mathbf{H}}_{\mathrm{B/F}} = \mathbf{H}_{\mathrm{B/F}} + \tilde{\mathbf{H}}_{\mathrm{B/F}},
@@ -531,7 +554,7 @@
 			The results are evaluated over the ground truth channels.
 			It is observed that the proposed channel shaping and joint beamforming solutions are reasonably robust to channel estimation errors.
 			An interesting observation is that a \gls{bd}-\gls{ris} designed over extremely poorly estimated channels ($\epsilon = 0.5$) may still outpeform a \gls{d}-\gls{ris} designed over almost perfectly estimated channels ($\epsilon = 0.01$).
-			We hope those results can motivate further research on the robust shaping/beamforming design and provide insights for practical \gls{bd}-\gls{ris} deployment.
+			We hope those results can motivate further research on the robust shaping design and provide insights for practical \gls{bd}-\gls{ris} deployment.
 		}
 	}
 
@@ -693,5 +716,5 @@
 
 
 \bibliographystyle{IEEEtran}
-\bibliography{supplement}
+\bibliography{response}
 \end{document}
