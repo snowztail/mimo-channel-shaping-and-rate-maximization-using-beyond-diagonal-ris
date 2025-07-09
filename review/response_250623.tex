@@ -1,0 +1,137 @@
+\documentclass[
+	fontsize=11pt,
+	paper=a4,
+	foldmarks=false
+]{scrartcl}
+
+\input{../manuscript/preamble}
+\usepackage{response}
+
+
+\setkomavar{signature}{Yang Zhao, Hongyu Li, Bruno Clerckx, and Massimo Franceschetti}
+\setkomavar{date}{\today}
+\setkomavar{subject}{Response to Decision on Manuscript T-SP-33360-2025}
+
+\begin{document}
+\begin{letter}{%
+		Prof. Wei Yi\\
+		Associate Editor\\
+		IEEE Transactions on Signal Processing
+	}
+	\opening{Dear Editor and Reviewers,}
+	Thank you for giving us an opportunity to revise the paper ``MIMO Channel Shaping and Rate Maximization Using Beyond Diagonal RIS''.
+	Your feedback and suggestions have been invaluable in helping us improve the quality of the manuscript.
+	Below we prepare a point-to-point response and highlight the corresponding changes in text, where labels have been matched to the submission for your convenience.
+	We hope the revisions and clarifications make the manuscript meet the TSP publication standards.
+	\closing{Yours sincerely,}
+\end{letter}
+
+
+\begin{editor}
+	\summary{
+		The paper has been improved after this round of revision. However, reviewers still pointed out several critical issues regarding the novelty, practical merit, performance assessment of the paper. For example, one reviewer criticized that the rate maximization problem is actually extensively studied in existing papers and solved by different methods, by different algorithms, e.g., \cite{Zhou2023}. The application of the derived bounds on \glspl{sv} on \gls{bd}-\gls{ris} channel has been well established in early papers, e.g., \cite{Rong2009a}. I am deciding on the major revision decision. However, in the revised version, the authors need to clarify the above-mentioned very fundamental issues, otherwise the paper can still be rejected.
+	}
+
+	\reply{
+		We appreciate your feedback and summary again.
+
+		In \cite{Zhou2023}, the authors considered an energy efficiency maximization problem for \emph{multi-user \gls{miso}} downlink systems.
+		A \gls{pdd} method was proposed for symmetric \gls{bd}-\gls{ris} design, which is a two-layer iterative procedure alternating between the primal variables in the inner layer and the penalty coefficient in the outer layer.
+		% While it {might} be extended to solving problem \eqref{op:rate},
+		The method is often used to tackle hard-to-satisfy constraints (e.g., \gls{sinr} threshold) and is notoriously tricky to implement.
+		Invoking \gls{pdd} for \gls{mimo} rate maximization problem \eqref{op:rate_ris} is theoretically feasible but computationally very inefficient.
+		% For example, to provide a stationary solution, it takes $\mathcal{O}(N_{\mathrm{s}}^2)$
+		% to provide a stationary solution for diagonal and fully-connected \gls{bd}-\gls{ris}
+		% For example, \gls{pdd} incurs $\mathcal{O}(N_{\mathrm{s}}^2)$ and $\mathcal{O}(N_{\mathrm{s}}^4)$ respectively to provide a stationary solution for \gls{d}-\gls{ris} and fully-connected \gls{bd}-\gls{ris} \cite[Table I]{Zhou2023}, while our proposed geodesic \gls{rcg} Algorithm \ref{ag:rcg} only takes $\mathcal{O}(N_{\mathrm{s}})$ and $\mathcal{O}(N_{\mathrm{s}}^3)$ respectively.
+		For example, \gls{pdd} requires $\mathcal{O}(N_{\mathrm{s}}^2)$ and $\mathcal{O}(N_{\mathrm{s}}^4)$ flops to obtain a stationary solution for \gls{d}-\gls{ris} and fully-connected \gls{bd}-\gls{ris}, respectively \cite[Table I]{Zhou2023}, whereas our proposed geodesic \gls{rcg} Algorithm~\ref{ag:rcg} achieves the same with respectively $\mathcal{O}(N_{\mathrm{s}})$ and $\mathcal{O}(N_{\mathrm{s}}^3)$ flops.
+		The latter exploits the structure of the block-unitary constraint for acceleration and can accommodate for the symmetric constraint when necessary (as discussed in Section \ref{sc:ris_symmetry}).
+
+		We would also like to point out that \cite{Rong2009a} investigated the optimal beamforming design for multi-hop \emph{\gls{af} relays} with \emph{no channel \gls{sv} manipulation bounds} taken into account.
+		The \gls{af} relays are active devices that consume power to amplify the signal in a noisy manner, and the channel \glspl{sv} are effectively unbounded.
+		The optimal structure of \gls{af} relays \cite[(17)]{Rong2009a} comes in the form
+		\begin{equation}
+			\mathbf{F} = \mathbf{V}_{\mathrm{B}} \mathbf{\Lambda} \mathbf{U}_{\mathrm{F}}^\mathsf{H},
+		\end{equation}
+		where $\mathbf{\Lambda}$ is a diagonal matrix that models the effect of relay power allocation.
+		The aim of \cite{Rong2009a} is to show ``The optimal source and relay matrices jointly diagonalize the multi-hop \gls{mimo} relay system into a set of parallel scalar channels''.
+		On the other hand, our paper aims to characterize the fundamental limits of \gls{bd}-\gls{ris} in \gls{mimo} channel \glspl{sv} shaping.
+		\gls{bd}-\gls{ris} can only manipulate the phase and amplitude of the signal by passive scattering without amplification, which is fundamentally different from \gls{af} relays in terms of hardware architecture, power consumption, and noise characteristics.
+		It just happens that the mathematical modeling of \gls{af} relays of unit power coincide with that of fully-connected \gls{bd}-\gls{ris}, and thus the rate-optimal solutions.
+		The underlying physical constraints and the resulting practical implications are clearly distinct.
+		We also supplied extensive case studies of \gls{bd}-\gls{ris} in Propositions \ref{pp:dof} -- \ref{pp:nd} and the resulting Corollaries, most of which have not been established in the literature.
+	}
+
+\end{editor}
+
+\begin{reviewer}
+	\summary{
+		The authors have addressed my concerns.
+	}
+
+	\reply{
+		Thank you for your positive feedback and continued support.
+	}
+\end{reviewer}
+
+
+\begin{reviewer}
+	\summary{
+		This paper explores potentials of a new type of \gls{ris}, specifically adopting a \gls{bd} scattering model, in shaping point-to-point \gls{mimo} channels for improved wireless performance. The authors derive analytical bounds under specific scenarios and propose a numerical optimization method for broader shaping problems, both of which are verified by simulation results. The paper tackles an important and timely question regarding the channel shaping capabilities of passive \gls{ris}, particularly moving beyond the conventional \gls{d}-\gls{ris} model. The singular value analysis and optimization is a fresh and relevant perspective in the field. However, there are areas which need further improvement:
+	}
+
+	\comment{
+	Implementation of \gls{bd}-\gls{ris}: The paper could benefit from more thorough discussions on practical implementation challenges of \gls{bd}-\gls{ris}, including manufacturing complexity, calibration, and hardware imperfections. Addressing these would enhance the paper's practical relevance and applicability.
+	}
+
+	\comment{
+	Comparison between \gls{rcg} methods: The link could be highlighted by mentioning that the non-geodesic update (additive + retraction) effectively employs a first-order Taylor approximation of the geodesic update (multiplicative via matrix exponential), thus necessitating the retraction step to ensure iterates remain on the manifold.
+	}
+
+	\comment{
+	Applicability to other \gls{bd}-\gls{ris} models: The focus is strongly on the group-connected \gls{bd}-\gls{ris} versus \gls{d}-\gls{ris}. The authors could clarify how the proposed methods and results might extend to other \gls{bd}-\gls{ris} models, such as multi-sector or multi-layer configurations. This would broaden the applicability of the findings and provide a more comprehensive understanding of the \gls{ris} landscape.
+	}
+
+	\comment{
+	Readability of the Technical Parts: The readability of the paper could be improved by having more intuitions and/or explanations after important theorems/lemmas/corollaries.
+	}
+\end{reviewer}
+
+
+\begin{reviewer}
+	\summary{
+		The reviewer appreciates the authors’ efforts to prepare the revision. The reviewer has the following concerns:
+	}
+
+	\comment{
+	The authors provide a bunch of bounds (Prop. \ref{pp:rd}) on \glspl{sv} of \gls{bd}-\gls{ris} channels. The significance of these bounds is unclear. What can these bounds be used for? One possible solution lies in the achievable maximal channel capacity (Corollary \ref{co:nd_capacity_snr_general}). However, this result (the well-known forward and backward channel alignment) has long been established, e.g., \cite{Rong2009a}. Especially, the bounds developed in corollaries \ref{co:nd_sv_prod_subset}-\ref{co:nd_sv_indl} are a great number of inequalities coupling with each other. How could these bounds be used?
+	}
+
+	\reply{
+		We appreciate the reviewer for the clinical questions and aim to answer them one-by-one below.
+		\begin{itemize}
+			% \item Proposition \ref{pp:rd} shows that
+			\item The \gls{sv} bounds in Proposition \ref{pp:rd} complements the \gls{dof} result in Proposition \ref{pp:dof} by quantifying the dynamic range of extreme singular values in low-multipath scenarios. They reveal a saturation effect of increasing the number of \gls{bd}-\gls{ris} elements and group size in enhancing channel shaping capability. Therefore, the bounds can be used to guide practical \gls{ris} configurations, especially in millimeter-wave and terahertz systems with sparse propagation environment, for a balanced performance gain and hardware complexity.
+			Another use case is strategic network planning where the bounds can help compare the shaping capabilities of a single massive \gls{ris} versus multiple smaller distributed ones.
+			\item The bounds in Corollary \ref{co:nd_sv_prod_subset} sketch the entire achievable channel \gls{sv} region under the assumption of negligible direct channel and fully-connected \gls{bd}-\gls{ris}. While direct application of every inequality within is not straightforward, they indeed provide a rich theoretical foundation and ultimate performance limit for \gls{mimo} channel shaping using \gls{bd}-\gls{ris}. One may choose any subset of those bounds for specific wireless applications and metrics, and some examples are given in Corollaries \ref{co:nd_sv_prod_tail} and \ref{co:nd_sv_indl}.
+			\item The bounds in Corollary \ref{co:nd_sv_prod_tail} reveal the upper (resp. lower) bound on the product of some largest (resp. smallest) channel \glspl{sv}. These bounds can be applied, for instance, as a shortcut to establish the upper bound of \gls{bd}-\gls{ris}-aided \gls{mimo} channel capacity at extreme \glspl{snr}.
+			\item The bounds in Corollary \ref{co:nd_sv_indl} reveal the shaping limits of the $n$-th largest channel \gls{sv}. These bounds can be applied, for instance, to provide a closed-form passive (and thus active) beamformer for spatial multiplexing with a limited number $n$ of \gls{rf} chains. Another use case is to enhance the harvested power for \gls{mimo} wireless power transfer with \gls{rf} combining by maximizing the dominant channel \gls{sv}.
+			One may also improve the channel condition number for numerically stable signal processing by maximizing the smallest channel \gls{sv}.
+			\item While \cite{Rong2009a} discussed the optimal beamforming structure for multi-hop \gls{af} relays, its focuses of channel diagonalization and relay power allocation are fundamentally different from this paper. The literature provides neither channel \gls{sv} bounds nor channel capacity bounds. Please kindly refer to our response to the editor on this matter.
+		\end{itemize}
+	}
+
+	\comment{
+	Prop. \ref{pp:shaping} imposes the assumption that $f(\cdot)$ must be symmetric gauge function in \glspl{sv} of $\mathbf{H}$. Note gauge function is strong assumption since it should be homogeneous and convex (e.g., \cite[Sec 3-I]{Marshall2010}) in \glspl{sv} of $\mathbf{H}$, which indeed severely restricts the range of its application. When $f(\cdot)$ is nonconvex, subdifferential ($\mathbf{D}$ in eq. \eqref{eq:shaping_subdiff}) generally does not exist. In fact, any commonly adopted performance metrics, e.g., spectral efficiency, energy efficiency, receiving power are not gauge functions (they are inhomogeneous and nonconvex).
+	On the other hand, to obtain partial differential with respect to (w.r.t.) \gls{ris}, (i.e., the aim of Prop. \ref{pp:shaping}), the assumption of gauge function is unnecessary. Directly taking the derivative of $f(\cdot)$ w.r.t. \gls{ris} is more preferable.
+	}
+
+	\comment{
+	The authors propose Riemannian Conjugate Gradient (\gls{rcg}) algorithm (Algorithm \ref{ag:rcg}) to optimize \gls{ris} configuration. Note CG descent on manifold is indeed well established and is widely used for optimization on manifolds, e.g., \cite{Boumal23t}. It can be implemented conveniently by off-the-shelf solvers, e.g., Manopt \cite{Boumal14a}. Then, what is the novelty or significance of Sec. \ref{sc:shaping_numerical}?
+	}
+
+\end{reviewer}
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{response}
+\end{document}
