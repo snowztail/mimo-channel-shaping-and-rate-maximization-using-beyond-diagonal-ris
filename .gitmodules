@@ -1,3 +1,6 @@
 [submodule "src/submodules/matlab2tikz"]
 	path = src/submodules/matlab2tikz
 	url = https://github.com/matlab2tikz/matlab2tikz.git
+[submodule "src/submodules/manopt"]
+	path = src/submodules/manopt
+	url = https://github.com/NicolasBoumal/manopt.git

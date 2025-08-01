@@ -36,7 +36,7 @@ handle.singular.direct = scatter(channel.singular.direct(1), channel.singular.di
 for b = 1 : number.bond
 	point.all = [vec(channel.singular.aggregate(1, :, :, b)), vec(channel.singular.aggregate(2, :, :, b))];
 	% * Pareto frontier
-	point.pareto = point.all(convhull(point.all), :);
+	point.pareto = point.all(convhull(point.all), :); % results very dense, use convhull for simplicity; see `pc_singular_region.m` for use of alphaShape
 	handle.singular.pareto(b) = plot(point.pareto(:, 1), point.pareto(:, 2), 'DisplayName', '$L = ' + string(reflect.bond(b)) + '$', 'LineStyle', ':', 'Color', handle.color{b});
 	% * channel power gain-optimal point
 	[~, index.power] = max(vecnorm(point.pareto, 2, 2));

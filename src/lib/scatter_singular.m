@@ -38,7 +38,6 @@ function [Theta, H] = scatter_singular(H_d, H_f, H_b, rho, L)
 end
 
 function [G_e] = gradient_euclidean(H, H_f, H_b, rho)
-	[U, S, V] = svd(H);
-	S(logical(eye(length(rho)))) = rho;
-	G_e = H_b' * U * S * V' * H_f';
+	[U, ~, V] = svd(H, 'econ');
+	G_e = H_b' * U * diag(rho) * V' * H_f';
 end
